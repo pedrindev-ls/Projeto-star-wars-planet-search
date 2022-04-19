@@ -1,18 +1,27 @@
 import React, { useContext, useEffect } from 'react';
-import requirePlanets from './Helpers/requirePlanets';
-import PlanetsContext from './Context/PlanetsContext';
+import requirePlanets from '../Helpers/requirePlanets';
+import PlanetsContext from '../Context/PlanetsContext';
 
 function Table() {
-  const { planets, addPlanets } = useContext(PlanetsContext);
+  const {
+    planets,
+    addPlanets,
+    planetName,
+    filteredPlanets,
+    filterByName } = useContext(PlanetsContext);
 
   async function askPlanets() {
     const planetsObj = await requirePlanets();
-    await addPlanets(planetsObj);
+    addPlanets(planetsObj);
   }
 
   useEffect(() => {
     askPlanets();
   });
+
+  useEffect(() => {
+    filterByName();
+  }, [planetName]);
 
   return (
     <table>
@@ -34,7 +43,7 @@ function Table() {
         </tr>
       </thead>
       <tbody>
-        {planets.map((element) => (
+        {planetName.length > 0 ? filteredPlanets.map((element) => (
           <tr key={ element.name }>
             <td>{ element.name }</td>
             <td>{ element.rotation_period }</td>
@@ -50,7 +59,26 @@ function Table() {
             <td>{ element.edited }</td>
             <td>{ element.url }</td>
           </tr>
-        ))}
+        ))
+          : (
+            planets.map((element) => (
+              <tr key={ element.name }>
+                <td>{ element.name }</td>
+                <td>{ element.rotation_period }</td>
+                <td>{ element.orbital_period }</td>
+                <td>{ element.diameter }</td>
+                <td>{ element.climate }</td>
+                <td>{ element.gravity }</td>
+                <td>{ element.terrain }</td>
+                <td>{ element.surface_water }</td>
+                <td>{ element.population }</td>
+                <td>{ element.films }</td>
+                <td>{ element.created }</td>
+                <td>{ element.edited }</td>
+                <td>{ element.url }</td>
+              </tr>
+            ))
+          )}
       </tbody>
     </table>
   );
