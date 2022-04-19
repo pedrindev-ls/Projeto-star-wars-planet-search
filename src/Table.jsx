@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import requirePlanets from './Helpers/helpers';
+import requirePlanets from './Helpers/requirePlanets';
 import PlanetsContext from './Context/PlanetsContext';
 
 function Table() {
@@ -36,19 +36,19 @@ function Table() {
       <tbody>
         {planets.map((element) => (
           <tr key={ element.name }>
-            <th>{ element.name }</th>
-            <th>{ element.rotation_period }</th>
-            <th>{ element.orbital_period }</th>
-            <th>{ element.diameter }</th>
-            <th>{ element.climate }</th>
-            <th>{ element.gravity }</th>
-            <th>{ element.terrain }</th>
-            <th>{ element.surface_water }</th>
-            <th>{ element.population }</th>
-            <th>{ element.films }</th>
-            <th>{ element.created }</th>
-            <th>{ element.edited }</th>
-            <th>{ element.url }</th>
+            <td>{ element.name }</td>
+            <td>{ element.rotation_period }</td>
+            <td>{ element.orbital_period }</td>
+            <td>{ element.diameter }</td>
+            <td>{ element.climate }</td>
+            <td>{ element.gravity }</td>
+            <td>{ element.terrain }</td>
+            <td>{ element.surface_water }</td>
+            <td>{ element.population }</td>
+            <td>{ element.films }</td>
+            <td>{ element.created }</td>
+            <td>{ element.edited }</td>
+            <td>{ element.url }</td>
           </tr>
         ))}
       </tbody>
