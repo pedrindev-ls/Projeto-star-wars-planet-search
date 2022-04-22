@@ -20,21 +20,21 @@ function PlanetsProvider(props) {
 
   function filterByNumber() {
     const filterComparison = filterByNumericValue[0].comparison;
-    console.log(filterComparison);
+    // ajeitar essa parte, ta dando erro na comparação e n ta saindo certo
     if (filterByNumericValue.length === 1 && filterComparison === 'maior que') {
       const filterColumn = filterByNumericValue[0].column;
       const filterValue = filterByNumericValue[0].value;
       const plusNumberFilters = filteredPlanets.filter((element) => (
-        element[filterColumn] >= filterValue
-        // console.log(element[filterColumn] > numericValue)
+        +element[filterColumn] > +filterValue
+        // console.log(filterValue, element[filterColumn], element[filterColumn] > numericValue)
       ));
       setFilteredPlanets(plusNumberFilters);
     } else if (filterByNumericValue.length === 1 && filterComparison === 'menor que') {
       const filterValue = filterByNumericValue[0].value;
       const filterColumn = filterByNumericValue[0].column;
       const lessNumberFilters = filteredPlanets.filter((element) => (
-        element[filterColumn] <= filterValue
-        // console.log(element[filterColumn] > numericValue)
+        +element[filterColumn] < +filterValue
+        // console.log(filterValue, element[filterColumn], +element[filterColumn] < +numericValue)
       ));
       setFilteredPlanets(lessNumberFilters);
     } else if (filterByNumericValue.length === 1 && filterComparison === 'igual a') {
