@@ -42,7 +42,7 @@ function PlanetsProvider(props) {
       const filterColumn = filterByNumericValue[0].column;
       // console.log('foi');
       const sameNumberFilters = filteredPlanets.filter((element) => (
-        element[filterColumn] === filterValue
+        +element[filterColumn] === +filterValue
         // console.log(element[filterColumn] > numericValue)
       ));
       setFilteredPlanets(sameNumberFilters);
