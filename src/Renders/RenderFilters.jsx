@@ -7,13 +7,16 @@ function RenderFilters() {
   return (
     <div>
       {filterByNumericValue.map((element, index) => (
-        <p key={ index }>
-          { element.column }
-          {' '}
-          { element.comparison }
-          {' '}
-          { element.value }
-        </p>
+        <div key={ index }>
+          <p>
+            { element.column }
+            {' '}
+            { element.comparison }
+            {' '}
+            { element.value }
+          </p>
+          <button type="button">X</button>
+        </div>
       ))}
     </div>
   );

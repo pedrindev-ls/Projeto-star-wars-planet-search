@@ -10,6 +10,8 @@ function PlanetsProvider(props) {
   const [comparasion, setComparasion] = useState('maior que');
   const [attribute, setAttribute] = useState('population');
   const [filterByNumericValue, setFilterByNumericValue] = useState([]);
+  const [options, setOptions] = useState(['population',
+    'orbital_period', 'diameter', 'rotation_period', 'surface_water']);
 
   function addPlanets(newPlanets) {
     setPlanets(newPlanets);
@@ -27,6 +29,8 @@ function PlanetsProvider(props) {
       const plusNumberFilters = filteredPlanets.filter((element) => (
         +element[filterColumn] > +filterValue
       ));
+      const removeColumn = options.filter((element) => element !== filterColumn);
+      setOptions(removeColumn);
       setFilteredPlanets(plusNumberFilters);
     } else if (filterByNumericValue.length === 1 && filterComparison === 'menor que') {
       const filterValue = filterByNumericValue[0].value;
@@ -34,6 +38,8 @@ function PlanetsProvider(props) {
       const lessNumberFilters = filteredPlanets.filter((element) => (
         +element[filterColumn] < +filterValue
       ));
+      const removeColumn = options.filter((element) => element !== filterColumn);
+      setOptions(removeColumn);
       setFilteredPlanets(lessNumberFilters);
     } else if (filterByNumericValue.length === 1 && filterComparison === 'igual a') {
       const filterValue = filterByNumericValue[0].value;
@@ -41,6 +47,8 @@ function PlanetsProvider(props) {
       const sameNumberFilters = filteredPlanets.filter((element) => (
         +element[filterColumn] === +filterValue
       ));
+      const removeColumn = options.filter((element) => element !== filterColumn);
+      setOptions(removeColumn);
       setFilteredPlanets(sameNumberFilters);
     }
   }
@@ -54,6 +62,8 @@ function PlanetsProvider(props) {
       const plusNumberMultipleFilters = filteredPlanets.filter((element) => (
         +element[filterColumn] > +filterValue
       ));
+      const removeColumn = options.filter((element) => element !== filterColumn);
+      setOptions(removeColumn);
       setFilteredPlanets(plusNumberMultipleFilters);
       // console.log('foi maior que');
     } else if (filterComparison === 'menor que') {
@@ -62,6 +72,8 @@ function PlanetsProvider(props) {
       const plusNumberMultipleFilters = filteredPlanets.filter((element) => (
         +element[filterColumn] < +filterValue
       ));
+      const removeColumn = options.filter((element) => element !== filterColumn);
+      setOptions(removeColumn);
       setFilteredPlanets(plusNumberMultipleFilters);
       // console.log('foi menor que');
     } else if (filterComparison === 'igual a') {
@@ -70,10 +82,11 @@ function PlanetsProvider(props) {
       const plusNumberMultipleFilters = filteredPlanets.filter((element) => (
         +element[filterColumn] === +filterValue
       ));
+      const removeColumn = options.filter((element) => element !== filterColumn);
+      setOptions(removeColumn);
       setFilteredPlanets(plusNumberMultipleFilters);
       // console.log('foi igual a');
     }
-    console.log(filterComparison);
   }
 
   function addFilter(filter) {
@@ -132,6 +145,8 @@ function PlanetsProvider(props) {
         addFilter,
         filterByNumber,
         filterByNumberMultiple,
+        options,
+        setOptions,
       } }
     >
       {children}
