@@ -20,14 +20,32 @@ function PlanetsProvider(props) {
 
   function filterByNumber() {
     const filterComparison = filterByNumericValue[0].comparison;
+    console.log(filterComparison);
     if (filterByNumericValue.length === 1 && filterComparison === 'maior que') {
       const filterColumn = filterByNumericValue[0].column;
       const filterValue = filterByNumericValue[0].value;
-      const numberFilters = filteredPlanets.filter((element) => (
-        element[filterColumn] > filterValue
+      const plusNumberFilters = filteredPlanets.filter((element) => (
+        element[filterColumn] >= filterValue
         // console.log(element[filterColumn] > numericValue)
       ));
-      setFilteredPlanets(numberFilters);
+      setFilteredPlanets(plusNumberFilters);
+    } else if (filterByNumericValue.length === 1 && filterComparison === 'menor que') {
+      const filterValue = filterByNumericValue[0].value;
+      const filterColumn = filterByNumericValue[0].column;
+      const lessNumberFilters = filteredPlanets.filter((element) => (
+        element[filterColumn] <= filterValue
+        // console.log(element[filterColumn] > numericValue)
+      ));
+      setFilteredPlanets(lessNumberFilters);
+    } else if (filterByNumericValue.length === 1 && filterComparison === 'igual a') {
+      const filterValue = filterByNumericValue[0].value;
+      const filterColumn = filterByNumericValue[0].column;
+      // console.log('foi');
+      const sameNumberFilters = filteredPlanets.filter((element) => (
+        element[filterColumn] === filterValue
+        // console.log(element[filterColumn] > numericValue)
+      ));
+      setFilteredPlanets(sameNumberFilters);
     }
   }
 

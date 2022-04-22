@@ -250,7 +250,7 @@ describe('3 - Crie um filtro para valores numéricos', () => {
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(DEFAULT_FILTERED_ROWS);
   });
 
-  it.skip('Filtre utilizando a comparação "menor que"', async () => {
+  it('Filtre utilizando a comparação "menor que"', async () => {
     await act(async () => {
       render(<App />);
     });
@@ -265,7 +265,7 @@ describe('3 - Crie um filtro para valores numéricos', () => {
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(LESS_FILTERED_ROWS);
   });
 
-  it.skip('Filtre utilizando a comparação "maior que"', async () => {
+  it('Filtre utilizando a comparação "maior que"', async () => {
     await act(async () => {
       render(<App />);
     });
@@ -280,7 +280,7 @@ describe('3 - Crie um filtro para valores numéricos', () => {
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(GREATER_FILTERED_ROWS);
   });
 
-  it.skip('Filtre utilizando a comparação "igual a"', async () => {
+  it('Filtre utilizando a comparação "igual a"', async () => {
     await act(async () => {
       render(<App />);
     });
