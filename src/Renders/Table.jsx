@@ -10,7 +10,8 @@ function Table() {
     filteredPlanets,
     filterByName,
     filterByNumber,
-    filterByNumericValue } = useContext(PlanetsContext);
+    filterByNumericValue,
+    filterByNumberMultiple } = useContext(PlanetsContext);
 
   async function askPlanets() {
     const planetsObj = await requirePlanets();
@@ -26,8 +27,10 @@ function Table() {
   }, [planetName]);
 
   useEffect(() => {
-    if (filterByNumericValue.length > 0) {
+    if (filterByNumericValue.length > 0 && filterByNumericValue.length < 2) {
       filterByNumber();
+    } else if (filterByNumericValue.length >= 2) {
+      filterByNumberMultiple();
     }
   }, [filterByNumericValue]);
 
