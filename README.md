@@ -5,7 +5,7 @@
   - ReactJS
   - CSS
   - RTL
-  - Contet API
+  - Context API
 
 ## Novas Features:
   - Testes com RTL
