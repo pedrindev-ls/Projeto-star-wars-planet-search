@@ -20,36 +20,44 @@ function PlanetsProvider(props) {
     }
   }
 
-  // function roleteFilter() {
-  //   if (filterByNumericValue) {
-  //     filterByNumericValue.map((element) => {
-  //       if (element.comparison === 'maior que') {
-  //         const filterColumn = element.column;
-  //         const filterValue = element.value;
-  //         const filtringPlanets = planets.filter((element2) => (
-  //           +element2[filterColumn] > +filterValue
-  //         ));
-  //         const removeColumn = options.filter((ops) => ops !== filterColumn);
-  //         setOptions(removeColumn);
-  //         setFilteredPlanets(filtringPlanets);
-  //       }
-  //       return 1;
-  //     });
-  //   } else {
-  //     setFilteredPlanets(planets);
-  //   }
-  // }
-
   function addFilter(filter) {
     setFilterByNumericValue([...filterByNumericValue, filter]);
   }
 
+  function renderFilters() {
+      filterByNumericValue.forEach((element) => {
+        const filteredColumn = element.column
+        const filteredValue = element.value
+        const filteredComparison = element.comparison
+        if (filteredComparison === 'maior que') {
+          const filtringPlanets = filteredPlanets.filter((element2) => +element2[filteredColumn] > +filteredValue)
+          setFilteredPlanets(filtringPlanets)
+          console.log('maior');
+          const newOps = options.filter((element2) => element2 !== filteredColumn)
+          setOptions(newOps)
+        } else if (filteredComparison === 'menor que') {
+          console.log('menor');
+          const filtringPlanets = filteredPlanets.filter((element2) => +element2[filteredColumn] < +filteredValue)
+          setFilteredPlanets(filtringPlanets)
+          const newOps = options.filter((element2) => element2 !== filteredColumn)
+          setOptions(newOps)
+        } else if (filteredComparison === 'igual a') {
+          const filtringPlanets = filteredPlanets.filter((element2) => +element2[filteredColumn] === +filteredValue)
+          setFilteredPlanets(filtringPlanets)
+          const newOps = options.filter((element2) => element2 !== filteredColumn)
+          setOptions(newOps)
+        }
+      })
+  }
+
   function filterByName() {
-    console.log(planetName.length);
-    if (planetName.length === 0) {
-      // setFilteredPlanets(filteredPlanets);
-      // roleteFilter();
-    } else if (planetName.length > 0) {
+    if (filterByNumericValue.length === 0) {
+      const filteredByName = planets.filter((element) => (
+        element.name.includes(planetName) === true));
+      setFilteredPlanets(filteredByName);
+    } else if (filterByNumericValue.length > 0) {
+      setFilteredPlanets(planets);
+      renderFilters();
       const filteredByName = filteredPlanets.filter((element) => (
         element.name.includes(planetName) === true));
       setFilteredPlanets(filteredByName);
@@ -98,6 +106,7 @@ function PlanetsProvider(props) {
         addFilter,
         options,
         setOptions,
+        renderFilters,
       } }
     >
       {children}
